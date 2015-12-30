@@ -10,6 +10,7 @@ namespace Eien.Framework
 	abstract class App
 	{
 		protected List<Controller> Controllers;
+		protected Color ClearColor;
 
 		VideoMode videoMode;
 		RenderWindow window;
@@ -21,7 +22,10 @@ namespace Eien.Framework
 		public App()
 		{
 			settings = new ContextSettings();
-			videoMode = new VideoMode(1280, 720); // Default.
+
+			// Defaults.
+			ClearColor = Color.Cyan;
+			videoMode = new VideoMode(1280, 720);
 		}
 
 		public void Start()
@@ -38,15 +42,16 @@ namespace Eien.Framework
 
 		public void Stop()
 		{
+			window.Close();
 		}
 
 		private void EngineUpdate()
 		{
 			Joystick.Update();
 
-			foreach(Controller c in Controllers)
+			foreach(Controller controller in Controllers)
 			{
-				c.Update(frameFinal: false);
+				controller.Update(frameFinal: false);
 			}
 
 			Update();
@@ -59,7 +64,7 @@ namespace Eien.Framework
 
 		private void EngineDraw()
 		{
-			window.Clear();
+			window.Clear(ClearColor);
 			window.DispatchEvents();
 			Draw();
 			window.Display(); 
@@ -119,7 +124,7 @@ namespace Eien.Framework
 
 		private void WindowClosed(object sender, EventArgs e)
 		{
-			window.Close();
+			Stop();
 		}
 	}
 }

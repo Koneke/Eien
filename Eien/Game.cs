@@ -8,7 +8,7 @@ namespace Eien.Framework
 		{
 			if(Controllers[0].Pressed(Button.Cross))
 			{
-				Resize(640, 480);
+				Stop();
 			}
 		}
 
