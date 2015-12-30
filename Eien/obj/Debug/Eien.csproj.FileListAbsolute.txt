@@ -1,0 +1,6 @@
+C:\Users\Lukas\git\Eien\Eien\bin\Debug\Eien.exe.config
+C:\Users\Lukas\git\Eien\Eien\bin\Debug\Eien.exe
+C:\Users\Lukas\git\Eien\Eien\bin\Debug\Eien.pdb
+C:\Users\Lukas\git\Eien\Eien\obj\Debug\Eien.csprojResolveAssemblyReference.cache
+C:\Users\Lukas\git\Eien\Eien\obj\Debug\Eien.exe
+C:\Users\Lukas\git\Eien\Eien\obj\Debug\Eien.pdb
