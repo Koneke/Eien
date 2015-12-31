@@ -9,6 +9,15 @@ namespace Eien.Content
 {
 	class AtlasLoader
 	{
+		[JsonProperty("FilePath")]
+		string FilePath;
+
+		[JsonProperty("HitboxPath")]
+		string HitboxPath;
+
+		[JsonProperty("Animations")]
+		List<JsonAnimation> Animations;
+
 		private class JsonFrame
 		{
 			public uint X;
@@ -20,17 +29,15 @@ namespace Eien.Content
 		{
 			public string Name;
 			public List<JsonFrame> Frames;
+			public bool Looping;
 		}
 
-		public static Atlas FromFile(string filepath)
+		public static Atlas AtlasFromLoader(AtlasLoader loader)
 		{
-			AtlasLoader loader = JsonConvert.DeserializeObject<AtlasLoader>(
-				File.ReadAllText(filepath));
-
 			Atlas atlas = new Atlas(loader.FilePath);
 
 			AtlasSlicer slicer = new AtlasSlicer(loader.FilePath);
-			List<AtlasSlice> slices = slicer.Slice();
+			List<AtlasSlicer.Slice> slices = slicer.SliceImage();
 
 			foreach(JsonAnimation jsonAnimation in loader.Animations)
 			{
@@ -38,7 +45,7 @@ namespace Eien.Content
 
 				foreach(JsonFrame frame in jsonAnimation.Frames)
 				{
-					AtlasSlice slice = slices.FirstOrDefault(
+					AtlasSlicer.Slice slice = slices.FirstOrDefault(
 						s => s.Coordinate == new Vector2u(frame.X, frame.Y)
 					);
 
@@ -47,7 +54,15 @@ namespace Eien.Content
 						throw new System.FormatException();
 					}
 
+					//HitboxParser parser = new HitboxParser(hitboxPath);
+					//animation.AddFrame(parser.parseSlice(slice));
+
 					animation.AddFrame(slice.Rectangle, frame.Duration);
+				}
+
+				if(jsonAnimation.Looping)
+				{
+					animation.Looping = true;
 				}
 
 				atlas.AddAnimation(animation);
@@ -56,10 +71,12 @@ namespace Eien.Content
 			return atlas;
 		}
 
-		[JsonProperty("FilePath")]
-		string FilePath;
+		public static Atlas AtlasFromFile(string filepath)
+		{
+			AtlasLoader loader = JsonConvert.DeserializeObject<AtlasLoader>(
+				File.ReadAllText(filepath));
 
-		[JsonProperty("Animations")]
-		List<JsonAnimation> Animations;
+			return AtlasFromLoader(loader);
+		}
 	}
 }

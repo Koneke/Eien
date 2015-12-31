@@ -1,12 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using Eien.Game;
 using SFML.Graphics;
+using SFML.System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Eien.Graphics
 {
-	class Frame
+	public class Frame
 	{
 		public IntRect Source;
+		public Vector2u Origin;
+		public List<Hitbox> Hitboxes;
 		public int Duration;
 
 		public Frame(IntRect source, int duration)
@@ -16,7 +20,7 @@ namespace Eien.Graphics
 		}
 	}
 
-	class Animation
+	public class Animation
 	{
 		public string Name;
 		public List<Frame> Frames;
@@ -60,7 +64,7 @@ namespace Eien.Graphics
 		}
 	}
 
-	class Atlas
+	public class Atlas
 	{
 		public SFML.Graphics.Sprite SfmlSprite;
 		public Dictionary<string, Animation> Animations;

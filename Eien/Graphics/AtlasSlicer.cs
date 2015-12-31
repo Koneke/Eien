@@ -4,22 +4,46 @@ using System.Collections.Generic;
 
 namespace Eien.Graphics
 {
-	class AtlasSlice
+	public class HitboxParser
 	{
-		public IntRect Rectangle;
-		public Vector2u Coordinate;
+		Image image;
 
-		public AtlasSlice(IntRect rectangle, Vector2u coordinate)
+		public HitboxParser(string filepath)
 		{
-			Rectangle = rectangle;
-			Coordinate = coordinate;
+			image = new Image(filepath);
+		}
+
+		public Frame ParseSlice(AtlasSlicer.Slice slice)
+		{
+			// Look up corresponding area on our hitboximage to the slice given,
+			// parse hitboxes and origin on it, create the frame with this information
+			// and the one sent in with the slice.
+
+			return null;
 		}
 	}
 
-	class AtlasSlicer
+	public class AtlasSlicer
 	{
+		public class Slice
+		{
+			public IntRect Rectangle;
+			public Vector2u Coordinate;
+
+			public Slice(IntRect rectangle, Vector2u coordinate)
+			{
+				Rectangle = rectangle;
+				Coordinate = coordinate;
+			}
+		}
+
 		Image image;
 		static Color magicColor = new Color(255, 0, 0);
+
+		// Hit/hurtbox colours.
+		static Color originColor = new Color(255, 0, 255);
+		static Color hitColor = new Color(255, 0, 0);
+		static Color hurtColor = new Color(0, 0, 255);
 
 		public AtlasSlicer(string filepath)
 		{
@@ -48,9 +72,9 @@ namespace Eien.Graphics
 			throw new System.FormatException("Malformatted spritesheet.");
 		}
 
-		public List<AtlasSlice> Slice()
+		public List<Slice> SliceImage()
 		{
-			List<AtlasSlice> slices = new List<AtlasSlice>();
+			List<Slice> slices = new List<Slice>();
 			Vector2u current = new Vector2u(0, 0);
 			Vector2u coordinates = new Vector2u(0, 0);
 
@@ -66,7 +90,7 @@ namespace Eien.Graphics
 						(int)(bottomRight.X - current.X) - 1,
 						(int)(bottomRight.Y - current.Y) - 1);
 
-					slices.Add(new AtlasSlice(rectangle, coordinates));
+					slices.Add(new Slice(rectangle, coordinates));
 
 					current.X = bottomRight.X;
 					coordinates.X++;

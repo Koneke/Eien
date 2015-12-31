@@ -10,6 +10,7 @@ namespace Eien.Framework
 	abstract class App
 	{
 		protected RenderWindow Window;
+		protected Random Random;
 		protected List<Controller> Controllers;
 		protected Color ClearColor;
 
@@ -24,6 +25,7 @@ namespace Eien.Framework
 
 		public App()
 		{
+			Random = new Random();
 			settings = new ContextSettings();
 
 			// Defaults.
