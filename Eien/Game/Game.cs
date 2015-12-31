@@ -1,6 +1,7 @@
 ﻿using Eien.Input;
 using Eien.Framework;
 using Eien.Graphics;
+using Eien.Content;
 
 namespace Eien.Game
 {
@@ -11,9 +12,10 @@ namespace Eien.Game
 		protected override void Initialise()
 		{
 			Window.SetFramerateLimit(60);
-			character = new Character().SetTexture("data/tex/spritesheet.png");
-			AtlasSlicer s = new AtlasSlicer();
-			s.Slice();
+
+			character = new Character()
+				.SetAtlas(AtlasLoader.FromFile("data/atlases/test.json"))
+				.StartAnimation("foo");
 		}
 
 		protected override void Update()
@@ -25,12 +27,12 @@ namespace Eien.Game
 
 			if(Controllers[0].Pressed(Button.Circle))
 			{
-				character.StartAnimation("blue");
+				character.StartAnimation("foo");
 			}
 
 			if(Controllers[0].Pressed(Button.Square))
 			{
-				character.StartAnimation("red");
+				character.StartAnimation("bar");
 			}
 		}
 

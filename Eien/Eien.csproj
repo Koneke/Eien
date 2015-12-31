@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Content\AtlasLoader.cs" />
     <Compile Include="Game\Character.cs" />
     <Compile Include="Graphics\Slicer.cs" />
     <Compile Include="Graphics\Atlas.cs" />

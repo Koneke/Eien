@@ -2,7 +2,7 @@
 using SFML.Graphics;
 using System.Linq;
 
-namespace Eien.Rendering
+namespace Eien.Graphics
 {
 	class Frame
 	{
@@ -18,6 +18,7 @@ namespace Eien.Rendering
 
 	class Animation
 	{
+		public string Name;
 		public List<Frame> Frames;
 		public bool Looping;
 
@@ -29,8 +30,9 @@ namespace Eien.Rendering
 			}
 		}
 
-		public Animation()
+		public Animation(string name)
 		{
+			Name = name;
 			Frames = new List<Frame>();
 		}
 
@@ -123,9 +125,9 @@ namespace Eien.Rendering
 			CurrentAnimation = null;
 		}
 
-		public Atlas AddAnimation(string key, Animation animation)
+		public Atlas AddAnimation(Animation animation)
 		{
-			Animations.Add(key, animation);
+			Animations.Add(animation.Name, animation);
 			return this;
 		}
 

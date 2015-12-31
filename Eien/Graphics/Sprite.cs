@@ -1,7 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 
-namespace Eien.Rendering
+namespace Eien.Graphics
 {
 	class DrawCall
 	{

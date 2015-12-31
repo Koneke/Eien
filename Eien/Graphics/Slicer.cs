@@ -21,9 +21,9 @@ namespace Eien.Graphics
 		Image image;
 		static Color magicColor = new Color(255, 0, 0);
 
-		public AtlasSlicer()
+		public AtlasSlicer(string filepath)
 		{
-			image = new Image("data/tex/slicetest.png");
+			image = new Image(filepath);
 		}
 
 		private Vector2u SearchBottomRight(Vector2u start)
