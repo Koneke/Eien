@@ -9,6 +9,10 @@ namespace Eien.TestApps
 {
 	class ButtonTest : App
 	{
+		protected override void Initialise()
+		{
+		}
+
 		protected override void Update()
 		{
 			Dictionary<Button, Color> buttonTests = new Dictionary<Button, Color>() {

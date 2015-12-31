@@ -1,12 +1,10 @@
-﻿using Eien.Framework;
-
-namespace Eien
+﻿namespace Eien
 {
 	class Program
 	{
 		static void Main(string[] args)
 		{
-			Game g = new Game();
+			Game.Game g = new Game.Game();
 			g.Start();
 		}
 	}

@@ -1,26 +1,57 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 
-namespace OrczNet.Graphics
+namespace Eien.Rendering
 {
-	class Sprite
+	class DrawCall
 	{
-		SFML.Graphics.Sprite internalSprite;
+		Sprite internalSprite;
 
-		public Sprite(string filepath)
+		private Vector2f position;
+		private Color color;
+		private IntRect source;
+
+		public DrawCall(Sprite sprite)
 		{
-			internalSprite = new SFML.Graphics.Sprite(new Texture(filepath));
+			internalSprite = new Sprite(sprite);
+
+			position = new Vector2f(0, 0);
+			color = SFML.Graphics.Color.White;
 		}
 
-		public void Draw(RenderWindow window, Vector2f position)
+		public DrawCall SetPosition(Vector2f position)
 		{
-			Draw(window, position, Color.White);
+			this.position = position;
+			return this;
 		}
 
-		public void Draw(RenderWindow window, Vector2f position, Color color)
+		public DrawCall SetColor(Color color)
+		{
+			this.color = color;
+			return this;
+		}
+
+		public DrawCall SetSource(IntRect source)
+		{
+			this.source = source;
+			return this;
+		}
+
+		private bool SourceIsEmpty()
+		{
+			return source.Width + source.Height == 0;
+		}
+
+		public void Draw(RenderWindow window)
 		{
 			internalSprite.Position = position;
 			internalSprite.Color = color;
+
+			if(!SourceIsEmpty())
+			{
+				internalSprite.TextureRect = source;
+			}
+
 			window.Draw(internalSprite);
 		}
 	}

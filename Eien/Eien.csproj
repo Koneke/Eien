@@ -59,10 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\Character.cs" />
+    <Compile Include="Graphics\SpriteSheet.cs" />
     <Compile Include="TestApps\AxisTest.cs" />
     <Compile Include="TestApps\ButtonTest.cs" />
     <Compile Include="Framework\App.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="Game\Game.cs" />
     <Compile Include="Graphics\Sprite.cs" />
     <Compile Include="Input\Controller.cs" />
     <Compile Include="Input\ControllerAxis.cs" />

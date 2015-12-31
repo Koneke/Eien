@@ -9,13 +9,16 @@ namespace Eien.Framework
 {
 	abstract class App
 	{
+		protected RenderWindow Window;
 		protected List<Controller> Controllers;
 		protected Color ClearColor;
 
 		VideoMode videoMode;
-		RenderWindow window;
 		ContextSettings settings;
 
+		public static int FramesSinceStart;
+
+		protected abstract void Initialise();
 		protected abstract void Update();
 		protected abstract void Draw();
 
@@ -33,7 +36,9 @@ namespace Eien.Framework
 			CreateWindow();
 			SetupPadSupport();
 
-			while(window.IsOpen)
+			Initialise();
+
+			while(Window.IsOpen)
 			{
 				EngineUpdate();
 				EngineDraw();
@@ -42,11 +47,12 @@ namespace Eien.Framework
 
 		public void Stop()
 		{
-			window.Close();
+			Window.Close();
 		}
 
 		private void EngineUpdate()
 		{
+			FramesSinceStart++;
 			Joystick.Update();
 
 			foreach(Controller controller in Controllers)
@@ -64,10 +70,10 @@ namespace Eien.Framework
 
 		private void EngineDraw()
 		{
-			window.Clear(ClearColor);
-			window.DispatchEvents();
+			Window.Clear(ClearColor);
 			Draw();
-			window.Display(); 
+			Window.DispatchEvents();
+			Window.Display(); 
 		}
 
 		private void SetupPadSupport()
@@ -85,8 +91,8 @@ namespace Eien.Framework
 				}
 			}
 
-			window.JoystickConnected += JoystickConnected;
-			window.JoystickDisconnected += JoystickDisconnected;
+			Window.JoystickConnected += JoystickConnected;
+			Window.JoystickDisconnected += JoystickDisconnected;
 		}
 
 		private void JoystickConnected(object sender, uint id)
@@ -106,14 +112,14 @@ namespace Eien.Framework
 
 		private void CreateWindow()
 		{
-			if(window != null)
+			if(Window != null)
 			{
-				window.Close();
-				window = null;
+				Window.Close();
+				Window = null;
 			}
 
-			window = new RenderWindow(videoMode, "Eien", Styles.Close | Styles.Titlebar, settings);
-			window.Closed += WindowClosed;
+			Window = new RenderWindow(videoMode, "Eien", Styles.Close | Styles.Titlebar, settings);
+			Window.Closed += WindowClosed;
 		}
 
 		public void Resize(uint width, uint height)

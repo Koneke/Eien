@@ -1,4 +1,5 @@
-﻿using Eien.Framework;
+﻿using System;
+using Eien.Framework;
 using Eien.Input;
 using SFML.Graphics;
 
@@ -6,6 +7,10 @@ namespace Eien.TestApps
 {
 	class AxisTest : App
 	{
+		protected override void Initialise()
+		{
+		}
+
 		float stickPercentage(bool left, bool x)
 		{
 			Axis axis = left
