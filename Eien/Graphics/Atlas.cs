@@ -58,7 +58,7 @@ namespace Eien.Rendering
 		}
 	}
 
-	class SpriteSheet
+	class Atlas
 	{
 		public SFML.Graphics.Sprite SfmlSprite;
 		public Dictionary<string, Animation> Animations;
@@ -116,27 +116,27 @@ namespace Eien.Rendering
 			}
 		}
 
-		public SpriteSheet(string filepath)
+		public Atlas(string filepath)
 		{
 			SfmlSprite = new Sprite(new Texture(filepath));
 			Animations = new Dictionary<string, Animation>();
 			CurrentAnimation = null;
 		}
 
-		public SpriteSheet AddAnimation(string key, Animation animation)
+		public Atlas AddAnimation(string key, Animation animation)
 		{
 			Animations.Add(key, animation);
 			return this;
 		}
 
-		public SpriteSheet StartAnimation(string key)
+		public Atlas StartAnimation(string key)
 		{
 			CurrentAnimation = key;
 			startFrame = Framework.App.FramesSinceStart;
 			return this;
 		}
 
-		public SpriteSheet SetTexture(string filepath)
+		public Atlas SetTexture(string filepath)
 		{
 			SfmlSprite.Texture = new Texture(filepath);
 			return this;

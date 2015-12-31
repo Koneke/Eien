@@ -5,11 +5,11 @@ namespace Eien.Game
 {
 	class Character
 	{
-		private SpriteSheet SpriteSheet;
+		private Atlas SpriteSheet;
 
 		public Character()
 		{
-			SpriteSheet = new SpriteSheet("data/tex/spritesheet.png")
+			SpriteSheet = new Atlas("data/tex/spritesheet.png")
 				.AddAnimation("red", new Animation()
 					.AddFrame(new IntRect(64, 0, 64, 64), 1))
 				.AddAnimation("blue", new Animation()
