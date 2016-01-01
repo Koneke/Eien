@@ -4,24 +4,6 @@ using System.Collections.Generic;
 
 namespace Eien.Graphics
 {
-	public class HitboxParser
-	{
-		Image image;
-
-		public HitboxParser(string filepath)
-		{
-			image = new Image(filepath);
-		}
-
-		public Frame ParseSlice(AtlasSlicer.Slice slice)
-		{
-			// Look up corresponding area on our hitboximage to the slice given,
-			// parse hitboxes and origin on it, create the frame with this information
-			// and the one sent in with the slice.
-
-			return null;
-		}
-	}
 
 	public class AtlasSlicer
 	{
@@ -39,11 +21,6 @@ namespace Eien.Graphics
 
 		Image image;
 		static Color magicColor = new Color(255, 0, 0);
-
-		// Hit/hurtbox colours.
-		static Color originColor = new Color(255, 0, 255);
-		static Color hitColor = new Color(255, 0, 0);
-		static Color hurtColor = new Color(0, 0, 255);
 
 		public AtlasSlicer(string filepath)
 		{

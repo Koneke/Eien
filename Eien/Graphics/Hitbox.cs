@@ -10,8 +10,8 @@ namespace Eien.Game
 			Hurtbox
 		}
 
-		IntRect Rectangle;
-		Type HitboxType;
+		public IntRect Rectangle;
+		public Type HitboxType;
 
 		public Hitbox(IntRect rectangle, Type hitboxType)
 		{

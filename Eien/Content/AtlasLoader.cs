@@ -43,21 +43,22 @@ namespace Eien.Content
 			{
 				Animation animation = new Animation(jsonAnimation.Name);
 
-				foreach(JsonFrame frame in jsonAnimation.Frames)
+				foreach(JsonFrame loadedFrame in jsonAnimation.Frames)
 				{
 					AtlasSlicer.Slice slice = slices.FirstOrDefault(
-						s => s.Coordinate == new Vector2u(frame.X, frame.Y)
-					);
+						s => s.Coordinate == new Vector2u(loadedFrame.X, loadedFrame.Y));
 
 					if(slice == null)
 					{
 						throw new System.FormatException();
 					}
 
-					//HitboxParser parser = new HitboxParser(hitboxPath);
-					//animation.AddFrame(parser.parseSlice(slice));
+					Frame frame = new Frame(slice.Rectangle, loadedFrame.Duration);
 
-					animation.AddFrame(slice.Rectangle, frame.Duration);
+					new HitboxParser(loader.HitboxPath)
+						.ProcessFrame(frame);
+
+					animation.AddFrame(frame);
 				}
 
 				if(jsonAnimation.Looping)

@@ -69,6 +69,7 @@
     <Compile Include="Graphics\AtlasSlicer.cs" />
     <Compile Include="Graphics\Atlas.cs" />
     <Compile Include="Graphics\Hitbox.cs" />
+    <Compile Include="Graphics\HitboxParser.cs" />
     <Compile Include="TestApps\AxisTest.cs" />
     <Compile Include="TestApps\ButtonTest.cs" />
     <Compile Include="Framework\App.cs" />
