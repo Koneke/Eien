@@ -48,7 +48,7 @@ namespace Eien.Content
 					AtlasSlicer.Slice slice = slices.FirstOrDefault(
 						s => s.Coordinate == new Vector2u(loadedFrame.X, loadedFrame.Y));
 
-					if(slice == null)
+					if(slice  == null)
 					{
 						throw new System.FormatException();
 					}
